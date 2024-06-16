@@ -4,7 +4,17 @@ import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../../StateProvider";
 import { getBasketTotal } from "../../reducer";
 import { useHistory } from "react-router-dom";
+import Mixpanel from 'mixpanel';
+>>>>
+UPDATED
 
+<<<< ORIGINAL
+<button onClick={(e) => history.push("/payment")}>
+====
+<button onClick={(e) => { Mixpanel.track('Proceed to Checkout', { cart_total: getBasketTotal(basket), number_items: basket.length }); history.push("/payment"); }}>
+>>>>
+UPDATED
+``
 function Subtotal() {
   const history = useHistory();
   const [{ basket }, dispatch] = useStateValue();
