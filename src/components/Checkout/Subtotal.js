@@ -28,8 +28,7 @@ function Subtotal() {
         thousandSeparator={true}
         prefix={"$"}
       />
-      <button onClick={(e) => history.push("/payment")}>
-        Proceed to Checkout
+<button onClick={(e) => { Mixpanel.track('Proceed to Checkout', { cart_total: getBasketTotal(basket), number_items: basket.length }); history.push("/payment"); }}>        Proceed to Checkout
       </button>
     </div>
   );
