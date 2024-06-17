@@ -5,7 +5,7 @@ import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../../StateProvider";
 import { getBasketTotal } from "../../reducer";
 import { useHistory } from "react-router-dom";
-
+mixpanel.init('58c886e21f37ceada78f5a7d090d1629', {debug: true, track_pageview: true, persistence: 'localStorage'});
 function Subtotal() {
   const history = useHistory();
   const [{ basket }, dispatch] = useStateValue();
