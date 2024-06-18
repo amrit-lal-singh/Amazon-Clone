@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import "./Payment.css";
@@ -43,6 +44,7 @@ function Payment() {
     // do all the fancy stripe stuff...
     event.preventDefault();
     setProcessing(true);
+    mixpanel.track('Buy Now Clicked', {user_email: user.email});
 
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
