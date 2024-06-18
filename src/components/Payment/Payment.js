@@ -51,9 +51,92 @@ function Payment() {
         },
       })
       .then(({ paymentIntent }) => {
-        // paymentIntent = payment confirmation
+on
+[
+    {
+        "<<<< ORIGINAL
+        import React, { useState, useEffect } from "react";
+        ====
+        import React, { useState, useEffect } from "react";
+        import mixpanel from 'mixpanel-browser';
+        >>>> UPDATED
+    },
+    {
+        "<<<< ORIGINAL
+        const handleSubmit = async (event) => {
+        // do all the fancy stripe stuff...
+        event.preventDefault();
+        setProcessing(true);
+        const payload = await stripe
+        .confirmCardPayment(clientSecret, {
+            payment_method: {
+            card: elements.getElement(CardElement),
+            },
+        })
+        .then(({ paymentIntent }) => {
+            // paymentIntent = payment confirmation
+            db.collection("users")
+            .doc(user?.uid)
+            .collection("orders")
+            .doc(paymentIntent.id)
+            .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+            });
 
-        db.collection("users")
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false);
+
+            dispatch({
+            type: "EMPTY_BASKET",
+            });
+
+            history.replace("/orders");
+        });
+        };
+        ====
+        const handleSubmit = async (event) => {
+        // do all the fancy stripe stuff...
+        event.preventDefault();
+        setProcessing(true);
+        const payload = await stripe
+        .confirmCardPayment(clientSecret, {
+            payment_method: {
+            card: elements.getElement(CardElement),
+            },
+        })
+        .then(({ paymentIntent }) => {
+            // paymentIntent = payment confirmation
+            db.collection("users")
+            .doc(user?.uid)
+            .collection("orders")
+            .doc(paymentIntent.id)
+            .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+            });
+
+            setSucceeded(true);
+            setError(null);
+            setProcessing(false);
+
+            // Mixpanel tracking
+            mixpanel.track('Buy Now', { user_email: user.email });
+
+            dispatch({
+            type: "EMPTY_BASKET",
+            });
+
+            history.replace("/orders");
+        });
+        };
+        >>>> UPDATED
+    }
+]
+``        db.collection("users")
           .doc(user?.uid)
           .collection("orders")
           .doc(paymentIntent.id)
