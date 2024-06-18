@@ -30,9 +30,18 @@ function Subtotal() {
       />
       <button onClick={(e) => history.push("/payment")}>
         Proceed to Checkout
-      </button>
-    </div>
-  );
-}
-
-export default Subtotal;
+  <<<< ORIGINAL
+    import "./Subtotal.css";
+    ====
+    import mixpanel from 'mixpanel-browser';
+    import "./Subtotal.css";
+    >>>> UPDATED
+    },
+    {
+    <<<< ORIGINAL
+    <button onClick={(e) => history.push("/payment")}>
+    ====
+    <button onClick={(e) => { mixpanel.track('Proceed to Checkout', { cart_total: getBasketTotal(basket), number_items: basket.length, add_to_cart_pressed: 'True' }); history.push("/payment"); }}>
+    >>>> UPDATED
+    }
+    
