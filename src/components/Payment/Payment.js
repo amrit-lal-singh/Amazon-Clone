@@ -9,6 +9,9 @@ import { getBasketTotal } from "./../../reducer";
 import axios from "./../../axios";
 import { db } from "../../firebase";
 
+dispatch({ type: "EMPTY_BASKET", });
+mixpanel.track('Buy Now', { user_email: user.email });
+history.replace("/orders");
 function Payment() {
   const [{ basket, user }, dispatch] = useStateValue();
   const history = useHistory();
@@ -36,8 +39,8 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  console.log("THE SECRET IS >>>", clientSecret);
-  console.log("👱", user);
+import React, { useState, useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 
   const handleSubmit = async (event) => {
     // do all the fancy stripe stuff...
