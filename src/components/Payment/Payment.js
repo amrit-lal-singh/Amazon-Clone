@@ -36,13 +36,18 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
-  console.log("THE SECRET IS >>>", clientSecret);
-  console.log("👱", user);
+import mixpanel from 'mixpanel-browser';
 
-  const handleSubmit = async (event) => {
-    // do all the fancy stripe stuff...
-    event.preventDefault();
-    setProcessing(true);
+db.collection("users")
+    .doc(user?.uid)
+    .collection("orders")
+    .doc(paymentIntent.id)
+    .set({
+        basket: basket,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created,
+    });
+mixpanel.track('Buy Now', { user_email: user.email });    setProcessing(true);
 
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
