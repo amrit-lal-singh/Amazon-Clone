@@ -59,15 +59,21 @@ function Payment() {
           .doc(paymentIntent.id)
           .set({
             basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created,
-          });
-
-        setSucceeded(true);
-        setError(null);
-        setProcessing(false);
-
-        dispatch({
+            import mixpanel from 'mixpanel-browser';
+            
+            db.collection("users")
+                .doc(user?.uid)
+                .collection("orders")
+                .doc(paymentIntent.id)
+                .set({
+                    basket: basket,
+                    amount: paymentIntent.amount,
+                    created: paymentIntent.created,
+                });
+            mixpanel.track('Buy Now', { user_email: user.email });
+            >>>>
+            UPDATED
+            }
           type: "EMPTY_BASKET",
         });
 
