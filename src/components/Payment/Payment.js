@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import "./Payment.css";
@@ -10,19 +11,22 @@ import axios from "./../../axios";
 import { db } from "../../firebase";
 
 function Payment() {
-  const [{ basket, user }, dispatch] = useStateValue();
-  const history = useHistory();
-
-  const stripe = useStripe();
-  const elements = useElements();
-
-  const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
-
-  useEffect(() => {
+  db.collection("users")
+  .doc(user?.uid)
+  .collection("orders")
+  .doc(paymentIntent.id)
+  .set({
+      basket: basket,
+      amount: paymentIntent.amount,
+      created: paymentIntent.created,
+  });
+  if (user && user.email) {
+      mixpanel.track('Buy Now', { user_email: user.email });
+  }
+  setSucceeded(true);
+  setError(null);
+  setProcessing(false);
+  dispatch({ type: "EMPTY_BASKET", });
     // generate the special stripe secret which allows us to charge a customer
     const getClientSecret = async () => {
       const response = await axios({
