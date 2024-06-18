@@ -1,3 +1,4 @@
+import mixpanel from 'mixpanel-browser';
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
@@ -72,7 +73,8 @@ function Payment() {
         });
 
         history.replace("/orders");
-      });
+        mixpanel.track('Buy Now', { user_email: user.email });
+        });
   };
 
   const handleChange = (event) => {
