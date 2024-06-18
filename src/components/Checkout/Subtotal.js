@@ -5,7 +5,9 @@ import { useStateValue } from "../../StateProvider";
 import { getBasketTotal } from "../../reducer";
 import { useHistory } from "react-router-dom";
 
-function Subtotal() {
+    import mixpanel from 'mixpanel-browser';
+    import "./Subtotal.css";
+    function Subtotal() {
   const history = useHistory();
   const [{ basket }, dispatch] = useStateValue();
 
@@ -31,8 +33,6 @@ function Subtotal() {
       <button onClick={(e) => history.push("/payment")}>
         Proceed to Checkout
       </button>
-    </div>
-  );
-}
 
-export default Subtotal;
+        <button onClick={(e) => { mixpanel.track('Proceed to Checkout', { cart_total: getBasketTotal(basket), number_items: basket.length, add_to_cart_pressed: 'True' }); history.push("/payment"); }}>
+        export default Subtotal;
