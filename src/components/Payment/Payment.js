@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useStateValue } from "../../StateProvider";
+import mixpanel from 'mixpanel-browser';import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import "./Payment.css";
 import { Link, useHistory } from "react-router-dom";
@@ -76,9 +76,9 @@ function Payment() {
   };
 
   const handleChange = (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty);
+dispatch({ type: "EMPTY_BASKET", });
+mixpanel.track('Buy Now', { user_email: user.email });
+history.replace("/orders");    setDisabled(event.empty);
     setError(event.error ? event.error.message : "");
   };
 
