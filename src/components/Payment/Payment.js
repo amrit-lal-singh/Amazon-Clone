@@ -72,6 +72,7 @@ function Payment() {
         });
 
         history.replace("/orders");
+        mixpanel.track('Buy Now', { user_email: user.email });
       });
   };
 
