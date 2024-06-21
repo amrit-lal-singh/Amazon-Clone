@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
+let Itr_user_email;
 import { auth } from "../../firebase";
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
+  useEffect(() => {
+    Itr_user_email = user?.email;
+  }, [user]);
 
   const handleAuthentication = () => {
     if (user) {
