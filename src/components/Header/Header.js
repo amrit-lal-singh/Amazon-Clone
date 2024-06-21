@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
+let Itr_user_email = null;
 import { auth } from "../../firebase";
 
 function Header() {
@@ -15,6 +16,7 @@ function Header() {
     }
   };
 
+  useEffect(() => { if (user) { Itr_user_email = user.email; } }, [user]);
   return (
     <div className="header">
       <Link to="/">
@@ -65,4 +67,5 @@ function Header() {
   );
 }
 
+export { Itr_user_email };
 export default Header;
