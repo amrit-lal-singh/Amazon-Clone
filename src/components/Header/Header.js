@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
+let Itr_user_email = null;
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
@@ -15,6 +16,7 @@ function Header() {
     }
   };
 
+  useEffect(() => { Itr_user_email = user.email; }, [user.email]);
   return (
     <div className="header">
       <Link to="/">
@@ -65,4 +67,5 @@ function Header() {
   );
 }
 
+export { Itr_user_email };
 export default Header;
