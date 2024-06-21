@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
 import { auth } from "../../firebase";
+
+let Itr_user_email = null;
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -14,6 +16,10 @@ function Header() {
       auth.signOut();
     }
   };
+
+  useEffect(() => {
+    Itr_user_email = user.email;
+  }, [user.email]);
 
   return (
     <div className="header">
@@ -66,3 +72,4 @@ function Header() {
 }
 
 export default Header;
+export { Itr_user_email };
