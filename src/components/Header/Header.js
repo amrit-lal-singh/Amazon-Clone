@@ -1,5 +1,7 @@
 import React from "react";
 import "./Header.css";
+import { useEffect } from "react";
+let Itr_user_email = null;
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
@@ -10,6 +12,9 @@ function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
 
   const handleAuthentication = () => {
+    useEffect(() => {
+      Itr_user_email = user?.email;
+    }, [user]);
     if (user) {
       auth.signOut();
     }
@@ -65,4 +70,5 @@ function Header() {
   );
 }
 
+export { Itr_user_email };
 export default Header;
