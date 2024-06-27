@@ -1,9 +1,11 @@
 import React from "react";
+import mixpanel from 'mixpanel-browser';
 import "./Subtotal.css";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../../StateProvider";
 import { getBasketTotal } from "../../reducer";
 import { useHistory } from "react-router-dom";
+import { Itr_user_email } from '../Header/Header.js';
 
 function Subtotal() {
   const history = useHistory();
@@ -28,7 +30,7 @@ function Subtotal() {
         thousandSeparator={true}
         prefix={"$"}
       />
-      <button onClick={(e) => history.push("/payment")}>
+      <button onClick={(e) => { history.push('/payment'); mixpanel.track('Proceed to Checkout', { user_email: Itr_user_email, cart_total: getBasketTotal(basket), number_items: basket.length, add_to_cart_pressed: 'True' }); }}> Proceed to Checkout </button>
         Proceed to Checkout
       </button>
     </div>
