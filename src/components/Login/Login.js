@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+let Itr_email = "";
+export { Itr_email };
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
 import "./Login.css";
 
 function Login() {
   const history = useHistory();
-  const [email, setEmail] = useState("");
+  // Removed useState for email
   const [password, setPassword] = useState("");
 
   const signIn = (e) => {
     e.preventDefault();
 
     auth
-      .signInWithEmailAndPassword(email, password)
+      auth.signInWithEmailAndPassword(Itr_email, password)
       .then((auth) => {
         history.push("/");
       })
@@ -23,7 +25,7 @@ function Login() {
     e.preventDefault();
 
     auth
-      .createUserWithEmailAndPassword(email, password)
+      auth.createUserWithEmailAndPassword(Itr_email, password)
       .then((auth) => {
         // it successfully created a new user with email and password
         console.log(auth);
@@ -51,7 +53,7 @@ function Login() {
           <input
             type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            <input type="text" value={Itr_email} onChange={(e) => Itr_email = e.target.value} />
           />
 
           <h5>Password</h5>
