@@ -1,4 +1,6 @@
 import React from "react";
+global.Itr_user_email = null;
+import "./Header.css";
 import "./Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
@@ -48,7 +50,7 @@ function Header() {
         </Link>
 
         <div className="header-option">
-          <span className="header-optionLineOne">Your</span>
+          <span className="header-optionLineOne"> Hello {!user ? "Guest" : (global.Itr_user_email = user.email, global.Itr_user_email)} </span>
           <span className="header-optionLineTwo">Prime</span>
         </div>
 
