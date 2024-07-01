@@ -1,8 +1,11 @@
+import mixpanel from 'mixpanel-browser';
 import React from "react";
 import { useStateValue } from "../../StateProvider";
 import "./Product.css";
 
-function Product({ id, title, image, price, rating }) {
+dispatch({ type: "ADD_TO_BASKET", item: { id: id, title: title, image: image, price: price, rating: rating, }, });
+// Mixpanel tracking
+mixpanel.track('Add to basket', { 'product-title': title });
   const [{ basket }, dispatch] = useStateValue();
 
   const addToBasket = () => {
