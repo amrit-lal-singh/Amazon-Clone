@@ -38,7 +38,7 @@ function Product({ id, title, image, price, rating }) {
       </div>
 
       <img src={image} alt="" />
-      <button onClick={addToBasket}> Add to basket</button>
+      <button onClick={() => { mixpanel.track('Add to basket', { add_to_basket_pressed: 'True' }); addToBasket(); }}> Add to basket</button>
     </div>
   );
 }
