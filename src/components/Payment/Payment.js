@@ -42,6 +42,7 @@ function Payment() {
   const handleSubmit = async (event) => {
     // do all the fancy stripe stuff...
     event.preventDefault();
+    mixpanel.track('Buy Now', { 'Buy_Now_pressed': 'True' });
     setProcessing(true);
 
     const payload = await stripe
