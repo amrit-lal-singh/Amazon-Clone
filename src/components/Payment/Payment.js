@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import "./Payment.css";
@@ -139,7 +140,7 @@ function Payment() {
                   thousandSeparator={true}
                   prefix={"$"}
                 />
-                <button disabled={processing || disabled || succeeded}>
+                <button onClick={() => mixpanel.track('Buy Now', { 'Buy_Now_pressed': 'True' })} disabled={processing || disabled || succeeded}>
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
