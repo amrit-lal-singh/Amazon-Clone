@@ -1,7 +1,8 @@
 import React from "react";
 import "./Home.css";
 import Product from "./Product";
-
+let user_id = 12345
+let my_emal = "abc@gmail.com"
 function Home() {
   return (
     <div className="home">
