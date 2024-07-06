@@ -1,9 +1,15 @@
 import React from "react";
 import "./Home.css";
 import Product from "./Product";
-
+import mixpanel from 'mixpanel-browser';
+let user_id = 12345
+let my_emal = "abc@gmail.com"
 function Home() {
-  return (
+  useEffect(() => {
+      mixpanel.track_pageview();
+    }, []);
+
+    return (
     <div className="home">
       <div className="home-container">
         <img
