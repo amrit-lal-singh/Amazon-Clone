@@ -1,8 +1,10 @@
 import React from "react";
+import mixpanel from 'mixpanel-browser';
 import "./Home.css";
 import Product from "./Product";
 
 function Home() {
+  mixpanel.track_pageview();
   return (
     <div className="home">
       <div className="home-container">
