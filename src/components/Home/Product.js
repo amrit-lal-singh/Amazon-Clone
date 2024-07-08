@@ -1,4 +1,5 @@
 import React from "react";
+import mixpanel from 'mixpanel-browser';
 import { useStateValue } from "../../StateProvider";
 import "./Product.css";
 
@@ -38,7 +39,7 @@ function Product({ id, title, image, price, rating }) {
       </div>
 
       <img src={image} alt="" />
-      <button onClick={addToBasket}> Add to basket</button>
+      <button onClick={() => { mixpanel.track('Add to basket', { 'product-price': price, 'add_to_basket_pressed': 'True' }); addToBasket(); }}> Add to basket</button>
     </div>
   );
 }
