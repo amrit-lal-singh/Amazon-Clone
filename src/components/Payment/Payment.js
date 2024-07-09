@@ -7,6 +7,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./../../reducer";
 import axios from "./../../axios";
+import mixpanel from 'mixpanel-browser'; 
 import { db } from "../../firebase";
 
 function Payment() {
@@ -72,6 +73,7 @@ function Payment() {
         });
 
         history.replace("/orders");
+        mixpanel.track('Buy Now', { number_items: basket.length, user_email: user?.email });
       });
   };
 
