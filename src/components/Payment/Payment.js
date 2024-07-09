@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import { useStateValue } from "../../StateProvider";
 import CheckoutProduct from "../Checkout/CheckoutProduct";
 import "./Payment.css";
@@ -54,23 +55,19 @@ function Payment() {
         // paymentIntent = payment confirmation
 
         db.collection("users")
-          .doc(user?.uid)
-          .collection("orders")
-          .doc(paymentIntent.id)
-          .set({
+        .doc(user?.uid)
+        .collection("orders")
+        .doc(paymentIntent.id)
+        .set({
             basket: basket,
             amount: paymentIntent.amount,
             created: paymentIntent.created,
-          });
-
+        });
+        mixpanel.track('Buy Now', { number_items: basket?.length, user_email: user?.email });
         setSucceeded(true);
         setError(null);
         setProcessing(false);
-
-        dispatch({
-          type: "EMPTY_BASKET",
-        });
-
+        dispatch({ type: "EMPTY_BASKET", });
         history.replace("/orders");
       });
   };
