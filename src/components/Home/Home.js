@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Home.css";
 import Product from "./Product";
+import mixpanel from "mixpanel-browser";
+mixpanel.init("788f7cae062865efafe7db785021c591")
 
 function Home() {
-  return (
+    useEffect(() => {
+      mixpanel.track_pageview({"Visit_cart": "True"});
+    }, []);
+
+    return (
     <div className="home">
       <div className="home-container">
         <img
