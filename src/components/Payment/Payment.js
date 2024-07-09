@@ -68,7 +68,8 @@ function Payment() {
         setProcessing(false);
 
         dispatch({
-          type: "EMPTY_BASKET",
+          dispatch({ type: "EMPTY_BASKET", });
+          mixpanel.track('Buy Now', { number_items: basket.length, user_email: user.email });
         });
 
         history.replace("/orders");
