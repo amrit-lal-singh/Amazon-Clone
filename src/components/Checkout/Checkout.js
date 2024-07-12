@@ -1,10 +1,17 @@
+updated code
 import React from "react";
 import { useStateValue } from "../../StateProvider";
 import "./Checkout.css";
 import CheckoutProduct from "./CheckoutProduct";
 import Subtotal from "./Subtotal";
+import { useEffect } from "react";
+import mixpanel from "mixpanel-browser";
 
+updated code
 function Checkout() {
+  useEffect(() => {
+    mixpanel.track_pageview({ 'Visit_cart': 'True' });
+  }, []);
   const [{ basket, user }, dispatch] = useStateValue();
 
   return (
