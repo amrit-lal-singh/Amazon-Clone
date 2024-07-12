@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import mixpanel from 'mixpanel-browser';
 import "./App.css";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -20,14 +21,12 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
+    mixpanel.track_pageview({'Visit_cart': 'True'});
     //will only run once when the app component loads...
-
     auth.onAuthStateChanged((authUser) => {
       console.log("THE USER IS >>>", authUser);
-
       if (authUser) {
         //the user just logged in / the user was logged in
-
         dispatch({
           type: "SET_USER",
           user: authUser,
