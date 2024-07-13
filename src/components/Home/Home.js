@@ -1,6 +1,9 @@
 import React from "react";
 import "./Home.css";
 import Product from "./Product";
+import mixpanel from "mixpanel-browser";
+
+mixpanel.init("788f7cae062865efafe7db785021c591")
 
 function Home() {
   return (
