@@ -1,4 +1,5 @@
 import React from "react";
+import mixpanel from 'mixpanel-browser';
 import "./Subtotal.css";
 import CurrencyFormat from "react-currency-format";
 import { useStateValue } from "../../StateProvider";
